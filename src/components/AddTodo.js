@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addTodoAction } from "../redux/actions";
+import { addTodoAction, getStaticTodos } from "../redux/actions";
 // redux action
 
 class AddTodoComnponent extends Component {
@@ -20,6 +20,11 @@ class AddTodoComnponent extends Component {
 		addTodoAction(this.state.input);
 		this.setState({ input: "" });
 	};
+	getStaticTodosFn = () => {
+		const { getStaticTodos } = this.props;
+
+		getStaticTodos();
+	};
 	render() {
 		return (
 			<div>
@@ -28,6 +33,7 @@ class AddTodoComnponent extends Component {
 					value={this.state.input}
 				/>
 				<button onClick={this.handleAddTodo}>add todo</button>
+				<button onClick={this.getStaticTodosFn}>get all todos</button>
 			</div>
 		);
 	}
@@ -36,5 +42,7 @@ class AddTodoComnponent extends Component {
 // 	addTodo: () => dispatch(addTodo),
 // });
 // connect(null, { addTodo })
-const connectedComponent = connect(null, { addTodoAction })(AddTodoComnponent);
+const connectedComponent = connect(null, { addTodoAction, getStaticTodos })(
+	AddTodoComnponent
+);
 export default connectedComponent;

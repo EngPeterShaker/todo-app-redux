@@ -2,9 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 function TodoList(props) {
 	console.log(`props`, props);
+	const { list = [] } = props;
 	return (
 		<div>
-			{props.list.map((item) => {
+			{list.map((item) => {
 				return <p key={item}>{item}</p>;
 			})}
 		</div>
