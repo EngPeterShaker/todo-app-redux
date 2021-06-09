@@ -1,25 +1,24 @@
 import axios from "axios";
-
-export const addTodoAction = (text) => ({
+export const addTodoAction = (id, text) => ({
 	type: "ADD_TODO",
 	payload: {
+		id,
 		text,
 	},
 });
 
+export const toggleTodo = (id) => ({
+	type: "TOGGLE_TODO",
+	payload: { id },
+});
+
 export const getStaticTodos = () => (dispatch) => {
-	axios.get("https://jsonplaceholder.typicode.com/todos").then(({ data }) => {
-		// const newData = getUsersWithDisplayName(data, "name");
-		dispatch(getStaticTodosSuccess(data));
-		console.log(`data`, data);
+	axios.get("https://jsonplaceholder.typicode.com/todos").then((response) => {
+		console.log(`respnse`, response);
+		dispatch(getStaticTodosSuccess(response.data));
 	});
 };
-
-const getStaticTodosSuccess = (data) => {
-	return {
-		type: "GET_STATIC_TODOS",
-		payload: {
-			text: data,
-		},
-	};
-};
+export const getStaticTodosSuccess = (data) => ({
+	type: "GET_STATIC_TODOS_SUCCESS",
+	payload: { data },
+});

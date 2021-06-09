@@ -1,13 +1,13 @@
 import logo from "./logo.svg";
 import "./App.css";
-import AddTodo from "./components/AddTodo";
-import TodoList from "./components/TodoList";
+// import CounterHooks, { x } from "./component/CounterHooks";
+import CounterRedux from "./component/CounterRedux";
+//import root reducer
 
 function App() {
 	return (
 		<div className="App">
-			<AddTodo />
-			<TodoList />
+			<CounterRedux />
 		</div>
 	);
 }

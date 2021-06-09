@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addTodoAction, getStaticTodos } from "../redux/actions";
+import { v4 as uuidv4 } from "uuid";
+
+import { addTodoAction, getStaticTodos } from "../redux/";
 // redux action
 
 class AddTodoComnponent extends Component {
@@ -16,14 +18,15 @@ class AddTodoComnponent extends Component {
 	handleAddTodo = () => {
 		// disptach action
 		const { addTodoAction } = this.props;
+		// const index = itemList.length + 1;
 
-		addTodoAction(this.state.input);
+		addTodoAction(uuidv4(), this.state.input);
+
 		this.setState({ input: "" });
 	};
 	getStaticTodosFn = () => {
-		const { getStaticTodos } = this.props;
-
-		getStaticTodos();
+		console.log(`props`, this.props);
+		this.props.getStaticTodos();
 	};
 	render() {
 		return (
@@ -33,7 +36,7 @@ class AddTodoComnponent extends Component {
 					value={this.state.input}
 				/>
 				<button onClick={this.handleAddTodo}>add todo</button>
-				<button onClick={this.getStaticTodosFn}>get all todos</button>
+				<button onClick={this.getStaticTodosFn}>get static todos</button>
 			</div>
 		);
 	}
@@ -42,6 +45,7 @@ class AddTodoComnponent extends Component {
 // 	addTodo: () => dispatch(addTodo),
 // });
 // connect(null, { addTodo })
+// const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(AddTodoComnponent);
 const connectedComponent = connect(null, { addTodoAction, getStaticTodos })(
 	AddTodoComnponent
 );
